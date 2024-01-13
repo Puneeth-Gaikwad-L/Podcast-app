@@ -1,7 +1,6 @@
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import './Components/Header'
-import Header from './Components/Header';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './Components/Header/header';
 import SignUp from './pages/SignUp';
 
 function App() {
@@ -10,6 +9,9 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<SignUp />} />
+          <Route path='/podcasts' element={<SignUp />} />
+          <Route path='/CreatePodcast' element={<SignUp />} />
+          <Route path='/profile' element={<SignUp />} />
         </Routes>
       </Router>
     </div>
