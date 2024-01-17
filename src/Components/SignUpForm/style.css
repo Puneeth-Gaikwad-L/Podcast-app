@@ -23,26 +23,6 @@
     flex-direction: column;
   }
 
-  .signUp-btn{
-    width: 95%;
-    margin-inline: auto;
-    border: 2px solid var(--white);
-    padding: 1rem 0px;
-    background-color: var(--theme);
-    color: var(--white);
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 700;
-    margin-top: 10px;
-    transition: all 0.3s ease-in;
-  }
-
-  .signUp-btn:hover{
-    background-color: var(--white);
-    color: var(--theme);
-  }
-
   
 
   @media only screen and (max-width: 940px){

@@ -8,19 +8,22 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../.././slice/userSlice';
 import './style.css'
 import { useNavigate } from 'react-router-dom';
+import { Bounce, toast } from 'react-toastify';
+import Button from '../Button/button';
 
 function SignUpForm() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
-
     const dispatch = useDispatch();
 
     async function handelFormSubmission(e) {
         e.preventDefault();
-        if (password === confirmPassword) {
+        if (name && email && password === confirmPassword && password.length >= 6) {
+            setLoading(true);
             // creating users account
             console.log(name, email, password, confirmPassword);
             try {
@@ -44,12 +47,72 @@ function SignUpForm() {
                     email: user.email,
                     uid: user.uid
                 }));
-
+                toast.success("Signup successful", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                });
+                setLoading(false)
                 navigate("/profile");
             } catch (error) {
                 console.error(error);
+                setLoading(false);
+                toast.error(error.message, {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                })
             }
         } else {
+            if (!name && !email && !password) {
+                toast.error("please fill all the felids", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                })
+            }else if (password.length < 6) {
+                toast.error("password must be at least 6 characters", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                })
+            } else if (password != confirmPassword) {
+                toast.error("password does't match", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                });
+            }
             console.error("password does't match");
         }
     }
@@ -61,7 +124,7 @@ function SignUpForm() {
                 <CustomInput type='email' state={email} setState={setEmail} placeholder='Email' required='true' />
                 <CustomInput type='password' state={password} setState={setPassword} placeholder='Password' required='true' />
                 <CustomInput type='password' state={confirmPassword} setState={setConfirmPassword} placeholder='Confirm Password' required='true' />
-                <button className='signUp-btn' type='submit'>Sign Up</button>
+                <Button text={loading ? "Loading.." : "Signup"} onClick={handelFormSubmission} disabled={loading}/>
             </form>
         </div>
     )
