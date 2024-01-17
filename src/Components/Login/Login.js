@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
 import CustomInput from '../Input/input';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../../Firebase/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setUser } from '../../slice/userSlice';
 
 function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     async function handelFormSubmission(e) {
         e.preventDefault();
@@ -12,25 +20,23 @@ function LoginForm() {
         // creating users account
         console.log(email, password);
         try {
-            const userCredentials = await createUserWithEmailAndPassword(
+            const userCredentials = await signInWithEmailAndPassword(
                 auth,
                 email,
                 password
             );
             const user = userCredentials.user;
-            console.log(user);
-            // saving user details
-            await setDoc(doc(db, "users", user.uid), {
-                name: name,
-                email: user.email,
-                uid: user.uid,
-            });
+            // fetching user details
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            const userData = userDoc.data();
+            console.log(userData);
 
             // save data in redux
             dispatch(setUser({
-                name: name,
-                email: user.email,
-                uid: user.uid
+                name: userData.name,
+                email: userData.email,
+                uid: userData.uid,
+                profilePic: userData.profilePic
             }));
 
             navigate("/profile");
