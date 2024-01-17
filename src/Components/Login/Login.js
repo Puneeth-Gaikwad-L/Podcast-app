@@ -5,9 +5,38 @@ function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    function handelFormSubmission(e) {
+    async function handelFormSubmission(e) {
         e.preventDefault();
         console.log(email, password);
+
+        // creating users account
+        console.log(email, password);
+        try {
+            const userCredentials = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            const user = userCredentials.user;
+            console.log(user);
+            // saving user details
+            await setDoc(doc(db, "users", user.uid), {
+                name: name,
+                email: user.email,
+                uid: user.uid,
+            });
+
+            // save data in redux
+            dispatch(setUser({
+                name: name,
+                email: user.email,
+                uid: user.uid
+            }));
+
+            navigate("/profile");
+        } catch (error) {
+            console.error(error);
+        }
         // setEmail('')
         // setPassword('')
     }
