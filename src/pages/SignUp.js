@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import Header from '../Components/Header/header'
-import SignUpForm from '../Components/SignUpForm/SignUpForm'
-import LoginForm from '../Components/Login/Login'
+import React, { useState } from 'react';
+import LoginForm from '../Components/LoginForm/Login';
+import SignUpForm from '../Components/SignUpForm/SignUpForm';
+import Header from '../Components/common/Header/header';
 
 function SignUp() {
 

@@ -1,15 +1,14 @@
-import React from 'react'
-import CustomInput from '../Input/input'
-import { useState } from 'react';
-import { auth, db } from '../../Firebase/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../.././slice/userSlice';
-import './style.css'
 import { useNavigate } from 'react-router-dom';
 import { Bounce, toast } from 'react-toastify';
-import Button from '../Button/button';
+import { setUser } from '../.././slice/userSlice';
+import { auth, db } from '../../Firebase/firebase';
+import Button from '../common/Button/button';
+import CustomInput from '../common/Input/input';
+import './style.css';
 
 function SignUpForm() {
     const [name, setName] = useState("");
@@ -124,7 +123,7 @@ function SignUpForm() {
                 <CustomInput type='email' state={email} setState={setEmail} placeholder='Email' required='true' />
                 <CustomInput type='password' state={password} setState={setPassword} placeholder='Password' required='true' />
                 <CustomInput type='password' state={confirmPassword} setState={setConfirmPassword} placeholder='Confirm Password' required='true' />
-                <Button text={loading ? "Loading.." : "Signup"} onClick={handelFormSubmission} disabled={loading}/>
+                <Button type={"submit"} text={loading ? "SigningUp.." : "Signup"} onClick={handelFormSubmission} disabled={loading}/>
             </form>
         </div>
     )

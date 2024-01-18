@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import CustomInput from '../Input/input';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from '../../Firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setUser } from '../../slice/userSlice';
-import Button from '../Button/button';
 import { Bounce, toast } from 'react-toastify';
+import { auth, db } from '../../Firebase/firebase';
+import { setUser } from '../../slice/userSlice';
+import Button from '../common/Button/button';
+import CustomInput from '../common/Input/input';
 
 function LoginForm() {
     const [email, setEmail] = useState("");
@@ -96,7 +96,7 @@ function LoginForm() {
             <form className='sign-up-form' onSubmit={handelFormSubmission}>
                 <CustomInput type='email' state={email} setState={setEmail} placeholder='Email' required='true' />
                 <CustomInput type='password' state={password} setState={setPassword} placeholder='Password' required='true' />
-                <Button text={loading ? "Loading.." : "login"} onClick={handelFormSubmission} disabled={loading} />
+                <Button type={"submit"} text={loading ? "Loading.." : "login"} onClick={handelFormSubmission} disabled={loading} />
             </form>
         </div>
     )
