@@ -9,9 +9,11 @@ import './App.css';
 import './Components/common/Header/header';
 import { auth, db } from './Firebase/firebase';
 import SignUp from './pages/SignUp';
-import Profile from './pages/profile';
 import { setUser } from './slice/userSlice';
 import PrivateRoutes from './Components/common/PrivateRoutes/PrivateRoutes';
+import CreatePodcast from './pages/CreatePodcast';
+import Podcasts from './pages/Podcasts';
+import Profile from './pages/profile';
 
 function App() {
   const dispatch = useDispatch();
@@ -53,10 +55,10 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path='/' element={<SignUp />} />
+          <Route path='/signup' element={<SignUp />} />
           <Route element={<PrivateRoutes />}>
-            <Route path='/podcasts' element={<SignUp />} />
-            <Route path='/CreatePodcast' element={<SignUp />} />
+            <Route path='/podcasts' element={<Podcasts />} />
+            <Route path='/CreatePodcast' element={<CreatePodcast />} />
             <Route path='/profile' element={<Profile />} />
           </Route>
         </Routes>

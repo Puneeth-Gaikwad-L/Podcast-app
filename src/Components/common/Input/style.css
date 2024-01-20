@@ -10,6 +10,22 @@
     margin-inline: auto;
 }
 
+.custom-fileInput{
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--purple-grey);
+}
+
+.active{
+    border-color: var(--white);
+}
+
+.custom-fileInput:hover{
+    cursor: pointer;
+}
+
 .custom-input:focus{
     outline: none;
     border-color: var(--white);

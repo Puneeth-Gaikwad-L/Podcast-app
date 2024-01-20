@@ -11,7 +11,7 @@ function PrivateRoutes() {
     if (loading) {
         return <p>Loading...</p>;
     } else if (!user || error) {
-        return <Navigate to="/" replace />
+        return <Navigate to="/signup" replace />
     } else {
         return <Outlet />;
     }

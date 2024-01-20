@@ -1,5 +1,4 @@
-
-.sign-up-container{
+.container{
     width: 40%;
     margin: auto;
     margin-top: 4rem;
@@ -10,21 +9,19 @@
     overflow: hidden;
     padding: 15px 0px;
     gap: 10px;
-  }
+}
 
-  .sign-up-form{
+.create-podcast-form{
     width: 95%;
     height: 90%;
     overflow: hidden;
     margin: auto;
     display: flex;
     flex-direction: column;
-  }
+}
 
-  
-
-  @media only screen and (max-width: 940px){
-    .sign-up-container{
+@media only screen and (max-width: 940px){
+    .container{
       width: 70%;
     }
   }
