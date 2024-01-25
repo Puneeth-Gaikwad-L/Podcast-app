@@ -76,7 +76,7 @@ function SignUpForm() {
             }
         } else {
             if (!name && !email && !password) {
-                toast.error("please fill all the felids", {
+                toast.error("please fill all the fields", {
                     position: "bottom-center",
                     autoClose: 5000,
                     hideProgressBar: false,
