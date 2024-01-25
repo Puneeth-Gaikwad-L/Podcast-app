@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import img from './images/upload.svg'
+import { FileImageOutlined } from '@ant-design/icons';
 function FileInput({ accept, id, label, fileHandleFuc }) {
 
   const [fileSelected, setFileSelected] = useState("");
@@ -12,7 +13,7 @@ function FileInput({ accept, id, label, fileHandleFuc }) {
 
   return (
     <>
-      <label htmlFor={id} className={`custom-input ${!fileSelected ? "custom-fileInput" : "active" }`}><img src={img} />{fileSelected ? fileSelected : label}</label>
+      <label htmlFor={id} className={`custom-input ${!fileSelected ? "custom-fileInput" : "active" }`}><FileImageOutlined />{fileSelected ? ` ${fileSelected}` : label}</label>
       <input type='file' accept={accept} id={id} style={{ display: 'none' }} onChange={onChange} />
     </>
   )

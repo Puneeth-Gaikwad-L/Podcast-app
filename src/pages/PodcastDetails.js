@@ -6,18 +6,18 @@ import { auth, db } from '../Firebase/firebase';
 import { Bounce, toast } from 'react-toastify';
 import Button from '../Components/common/Button/button';
 import EpisodesDetail from '../Components/common/Podcasts/Episodes/EpisodesDetail';
+import AudioPlayer from '../Components/common/Podcasts/AudioPlayer/AudioPlayer';
 
 function PodcastDetailsPage() {
     const { id } = useParams();
     const [podcast, setPodcast] = useState({});
     const [episodes, setEpisodes] = useState([])
+    const [playingFile, setPlayingFile] = useState('')
     const navigate = useNavigate();
 
     useEffect(() => {
         if (id) {
-            return () => {
-                getData()
-            };
+            getData()
         }
     }, [id])
 
@@ -32,17 +32,6 @@ function PodcastDetailsPage() {
                     id: docSnap.id,
                     ...docSnap.data()
                 })
-                toast.success("Podcast found", {
-                    position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    transition: Bounce,
-                });
             } else {
                 toast.error("no such documents found", {
                     position: "bottom-center",
@@ -81,6 +70,7 @@ function PodcastDetailsPage() {
                     episodeData.push({ id: doc.id, ...doc.data() });
                 });
                 setEpisodes(episodeData);
+                console.log(episodeData);
             },
             (error) => {
                 console.error("error fetching episodes", error);
@@ -96,7 +86,7 @@ function PodcastDetailsPage() {
     return (
         <div>
             <Header />
-            <div className='wrapper' style={{}}>
+            <div className='wrapper' >
                 {podcast.id &&
                     <>
                         <div className='podcast-heading-wrapper'>
@@ -109,7 +99,8 @@ function PodcastDetailsPage() {
                                         padding: "10px",
                                         borderRadius: "10px",
                                         fontWeight: "400"
-                                    }} />)}
+                                    }} />
+                                )}
                         </div>
 
                         <div className='banner-wrapper'>
@@ -118,19 +109,28 @@ function PodcastDetailsPage() {
                         <p className='podcast-desc'>{podcast.description}</p>
                         <h1 className='podcast-title-heading'>Episodes</h1>
                         {episodes.length > 0 ? (
-                            <ol>{episodes.map((episode) => {
-                                return <EpisodesDetail
-                                    title={episode.title}
-                                    desc={episode.desc}
-                                    audioFile={episode.audioFile}
-                                    onClick={(file) => console.log("Playing file" + file)} />
-                            })}</ol>
-                        ) : (
-                            <p>No Episode</p>
-                        )}
+                            <>
+                                {episodes.map((episode, index) => {
+                                    return (
+                                        <EpisodesDetail
+                                            key={index}
+                                            index={index + 1}
+                                            title={episode.title}
+                                            desc={episode.description}
+                                            audioFile={episode.audioUrl}
+                                            onClick={(file) => setPlayingFile(file)} />
+                                    );
+                                })}
+                            </>
+                        ) : (<p>No Episode</p>)
+                        }
                     </>
                 }
             </div>
+            {
+                playingFile &&
+                <AudioPlayer audioSrc={playingFile} image={podcast.displayImage} />
+            }
         </div>
     )
 }

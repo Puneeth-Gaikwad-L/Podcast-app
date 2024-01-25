@@ -57,7 +57,7 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path='/signup' element={<SignUp />} />
+          <Route path='/' element={<SignUp />} />
           <Route element={<PrivateRoutes />}>
             <Route path='/podcasts' element={<Podcasts />} />
             <Route path='/CreatePodcast' element={<CreatePodcast />} />
