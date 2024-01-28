@@ -2,15 +2,16 @@ import React from 'react'
 import './style.css'
 import PlayingPodcastDetails from './PlayingPodcastInfo/PlayingPodcastDetails'
 import PlayerControles from './PlayerControles/PlayerControles'
-import AudioContoles from  './AudioControles/AudioControles'
+import AudioContoles from './AudioControles/AudioControles'
 
-function AudioPlayer({playingFile, displayImage}) {
+function AudioPlayer({ podcast, audioSrc }) {
   return (
-      <div className='custom-audio-player'>
-          <PlayingPodcastDetails displayImage={displayImage} />
-          <PlayerControles />
-          <AudioContoles />
-      </div>
+    <div className='custom-audio-player'>
+      <div className='player-gradient'></div>
+      <PlayingPodcastDetails displayImage={podcast.displayImage} podcastTitle={podcast.title} />
+      <PlayerControles />
+      <AudioContoles />
+    </div>
   )
 }
 

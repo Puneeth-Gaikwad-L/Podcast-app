@@ -129,7 +129,7 @@ function PodcastDetailsPage() {
             </div>
             {
                 playingFile &&
-                <AudioPlayer audioSrc={playingFile} image={podcast.displayImage} />
+                <AudioPlayer podcast={podcast} audioSrc={playingFile} />
             }
         </div>
     )
