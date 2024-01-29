@@ -13,6 +13,7 @@ function PodcastDetailsPage() {
     const [podcast, setPodcast] = useState({});
     const [episodes, setEpisodes] = useState([])
     const [playingFile, setPlayingFile] = useState('')
+    const [playingEpisode, setPlayingEpisode] = useState("")
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -118,7 +119,10 @@ function PodcastDetailsPage() {
                                             title={episode.title}
                                             desc={episode.description}
                                             audioFile={episode.audioUrl}
-                                            onClick={(file) => setPlayingFile(file)} />
+                                            onClick={(file, title) => {
+                                                setPlayingEpisode(title)
+                                                setPlayingFile(file)
+                                            }} />
                                     );
                                 })}
                             </>
@@ -129,7 +133,7 @@ function PodcastDetailsPage() {
             </div>
             {
                 playingFile &&
-                <AudioPlayer podcast={podcast} audioSrc={playingFile} />
+                <AudioPlayer podcast={podcast} audioSrc={playingFile} episodeTitle={playingEpisode} />
             }
         </div>
     )

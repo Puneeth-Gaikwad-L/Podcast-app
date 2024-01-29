@@ -30,6 +30,22 @@
     color: var(--white);
   }
 
+  body::-webkit-scrollbar{
+    width: 10px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: var(--grey);
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background: #636363;
+  }
+
+  body::-webkit-scrollbar-thumb:hover {
+    background: #888;
+  }
+
   input {
     font-family: 'Inter', sans-serif;
   }
@@ -49,6 +65,7 @@
     display: flex;
     margin-inline: auto;
     flex-direction: column;
+    margin-bottom: 85px;
   }
 
   .page-title {
