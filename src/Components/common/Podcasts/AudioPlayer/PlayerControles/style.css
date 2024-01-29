@@ -1,0 +1,53 @@
+.duration-range{
+    filter: hue-rotate(25deg);
+    width: 100%;
+    height: 3px;
+    cursor: pointer;
+}
+.audio-controls{
+    width: 40%;
+    height: 100%;
+    margin-left: -160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.duration-flex{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.duration-flex p{
+    font-size: 0.8rem;
+}
+
+.control-buttons{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1.6rem;
+}
+
+.control-buttons div{
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.5s ease-in;
+}
+
+.control-buttons div:hover{
+    background-color: var(--white);
+    color: var(--theme);
+}

@@ -9,7 +9,7 @@ function AudioPlayer({ podcast, audioSrc }) {
     <div className='custom-audio-player'>
       <div className='player-gradient'></div>
       <PlayingPodcastDetails displayImage={podcast.displayImage} podcastTitle={podcast.title} />
-      <PlayerControles />
+      <PlayerControles audioSrc={audioSrc} />
       <AudioContoles />
     </div>
   )
