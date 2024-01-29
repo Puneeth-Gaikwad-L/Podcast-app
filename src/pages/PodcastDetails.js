@@ -115,7 +115,6 @@ function PodcastDetailsPage() {
                                     return (
                                         <EpisodesDetail
                                             key={index}
-                                            index={index + 1}
                                             title={episode.title}
                                             desc={episode.description}
                                             audioFile={episode.audioUrl}
@@ -124,7 +123,7 @@ function PodcastDetailsPage() {
                                                 setPlayingFile(file)
                                             }} />
                                     );
-                                })}
+                                }).reverse()}
                             </>
                         ) : (<p>No Episode</p>)
                         }

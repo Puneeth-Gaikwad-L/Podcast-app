@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './style.css'
-import { BackwardFilled, CaretRightFilled, ForwardFilled, PauseOutlined } from '@ant-design/icons';
+import { BackwardFilled, CaretRightFilled, FastBackwardFilled, FastForwardFilled, ForwardFilled, PauseOutlined } from '@ant-design/icons';
 import PlayingPodcastDetails from '../PlayingPodcastInfo/PlayingPodcastDetails';
 import AudioControles from '../AudioControles/AudioControles';
 
@@ -31,7 +31,7 @@ function PlayerControles({ podcast, audioSrc, episodeTitle }) {
       audio.removeEventListener("ended", handleEnded);
     }
   }, [])
-  
+
   const handleTimeUpdate = (e) => {
     setCurrentTime(audioRef.current.currentTime);
   }
@@ -54,20 +54,35 @@ function PlayerControles({ podcast, audioSrc, episodeTitle }) {
     setIsPlaying(!isPlaying);
   }
 
+  const handelBackward = () => {
+    audioRef.current.currentTime -= 5;
+  }
+
+  const handelForward = () => {
+    audioRef.current.currentTime += 5;
+  }
+
+  const handelFastBackward = (e) => {
+    console.log(e.target);
+  }
+
   const formatTime = (time) => {
     let minutes = Math.floor(time / 60);
     let seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   }
 
-  
+
   return (
     <>
       <PlayingPodcastDetails displayImage={podcast.displayImage} episodeTitle={episodeTitle} />
       <div className='audio-controls'>
         <audio ref={audioRef} src={audioSrc} />
         <div className='control-buttons'>
-          <div>
+          <div onClick={handelFastBackward}>
+            <FastBackwardFilled />
+          </div>
+          <div onClick={handelBackward}>
             <BackwardFilled />
           </div>
 
@@ -75,15 +90,17 @@ function PlayerControles({ podcast, audioSrc, episodeTitle }) {
             {isPlaying ? <PauseOutlined /> : <CaretRightFilled />}
           </div>
 
-          <div>
+          <div onClick={handelForward}>
             <ForwardFilled />
           </div>
-
+          <div>
+            <FastForwardFilled />
+          </div>
         </div>
         <div className='duration-flex'>
           <p>{formatTime(currentTime)}</p>
           <input type='range' value={currentTime} max={duration} step={0.01} onChange={handleDuration} className='duration-range' />
-          <p>{formatTime(duration-currentTime)}</p>
+          <p>{formatTime(duration - currentTime)}</p>
         </div>
       </div>
       <AudioControles audioRef={audioRef} />

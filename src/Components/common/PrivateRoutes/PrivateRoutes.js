@@ -1,7 +1,9 @@
 import React from 'react'
-import {useAuthState} from 'react-firebase-hooks/auth'
+import './style.css'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../../../Firebase/firebase'
 import { Navigate, Outlet } from 'react-router-dom';
+import { LoadingOutlined } from '@ant-design/icons';
 
 function PrivateRoutes() {
 
@@ -9,9 +11,13 @@ function PrivateRoutes() {
 
 
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+            <p className='loading-screen'>
+                <LoadingOutlined />
+            </p>
+        )
     } else if (!user || error) {
-        return <Navigate to="/signup" replace />
+        return <Navigate to="/" replace />
     } else {
         return <Outlet />;
     }
