@@ -13,11 +13,20 @@
     --grey: #d7d7d7;
     --purple-grey: #8f8297;
 
-    /* --theme: #05060C;
-    --blue: #fffff0; */
+
   }
 
-  html{
+  body[data-theme="dark"] {
+    --theme: #05060C;
+    --blue: #fffff0;
+  }
+
+  body[data-theme="light"] {
+    --theme: #20062e;
+    --blue: #18b2de;
+  }
+
+  html {
     scroll-behavior: smooth;
   }
 
@@ -30,7 +39,7 @@
     color: var(--white);
   }
 
-  body::-webkit-scrollbar{
+  body::-webkit-scrollbar {
     width: 10px;
   }
 
@@ -134,7 +143,7 @@
     align-items: center;
   }
 
-  .create-episode-wrapper{
+  .create-episode-wrapper {
     width: 50%;
     margin-top: 30px;
     align-items: center;

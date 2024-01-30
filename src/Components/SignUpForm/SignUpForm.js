@@ -8,6 +8,7 @@ import { setUser } from '../.././slice/userSlice';
 import { auth, db } from '../../Firebase/firebase';
 import Button from '../common/Button/button';
 import CustomInput from '../common/Input/input';
+import FileInput from '../common/Input/FileInput'
 import './style.css';
 
 function SignUpForm() {
@@ -15,13 +16,14 @@ function SignUpForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [profilePic, setProfilePic] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
     async function handelFormSubmission(e) {
         e.preventDefault();
-        if (name && email && password === confirmPassword && password.length >= 6) {
+        if (name && email && profilePic && password === confirmPassword && password.length >= 6) {
             setLoading(true);
             // creating users account
             console.log(name, email, password, confirmPassword);
@@ -87,7 +89,7 @@ function SignUpForm() {
                     theme: "dark",
                     transition: Bounce,
                 })
-            }else if (password.length < 6) {
+            } else if (password.length < 6) {
                 toast.error("password must be at least 6 characters", {
                     position: "bottom-center",
                     autoClose: 5000,
@@ -115,15 +117,20 @@ function SignUpForm() {
             console.error("password does't match");
         }
     }
+
+    function handelingProfilePic(file) {
+        setProfilePic(file)
+    }
     return (
         <div className='sign-up-container'>
             <h1>SignUp</h1>
             <form className='sign-up-form' onSubmit={handelFormSubmission}>
                 <CustomInput type='text' state={name} setState={setName} placeholder='Full Name' required='true' />
                 <CustomInput type='email' state={email} setState={setEmail} placeholder='Email' required='true' />
+                <FileInput accept={"image/*"} label={"Profile Pic"} fileHandleFuc={handelingProfilePic} />
                 <CustomInput type='password' state={password} setState={setPassword} placeholder='Password' required='true' />
                 <CustomInput type='password' state={confirmPassword} setState={setConfirmPassword} placeholder='Confirm Password' required='true' />
-                <Button type={"submit"} text={loading ? "SigningUp.." : "Signup"} onClick={handelFormSubmission} disabled={loading}/>
+                <Button type={"submit"} text={loading ? "SigningUp.." : "Signup"} onClick={handelFormSubmission} disabled={loading} />
             </form>
         </div>
     )

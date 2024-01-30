@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Components/common/Header/header'
 import { collection, onSnapshot, query } from 'firebase/firestore'
 import { db } from "../Firebase/firebase"
@@ -12,7 +12,7 @@ function Podcasts() {
     const dispatch = useDispatch();
     const podcasts = useSelector((state) => state.podcasts.podcasts);
 
-    const [search, setSearch] = React.useState("");
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         const unSubscribe = onSnapshot(
