@@ -23,7 +23,7 @@ function SignUpForm() {
 
     async function handelFormSubmission(e) {
         e.preventDefault();
-        if (name && email && profilePic && password === confirmPassword && password.length >= 6) {
+        if (name && email && password === confirmPassword && password.length >= 6) {
             setLoading(true);
             // creating users account
             console.log(name, email, password, confirmPassword);
@@ -77,7 +77,7 @@ function SignUpForm() {
                 })
             }
         } else {
-            if (!name && !email && !password) {
+            if (!name || !email || !password) {
                 toast.error("please fill all the fields", {
                     position: "bottom-center",
                     autoClose: 5000,
@@ -114,7 +114,7 @@ function SignUpForm() {
                     transition: Bounce,
                 });
             }
-            console.error("password does't match");
+            console.error("error");
         }
     }
 
@@ -127,7 +127,7 @@ function SignUpForm() {
             <form className='sign-up-form' onSubmit={handelFormSubmission}>
                 <CustomInput type='text' state={name} setState={setName} placeholder='Full Name' required='true' />
                 <CustomInput type='email' state={email} setState={setEmail} placeholder='Email' required='true' />
-                <FileInput accept={"image/*"} label={"Profile Pic"} fileHandleFuc={handelingProfilePic} />
+                
                 <CustomInput type='password' state={password} setState={setPassword} placeholder='Password' required='true' />
                 <CustomInput type='password' state={confirmPassword} setState={setConfirmPassword} placeholder='Confirm Password' required='true' />
                 <Button type={"submit"} text={loading ? "SigningUp.." : "Signup"} onClick={handelFormSubmission} disabled={loading} />
